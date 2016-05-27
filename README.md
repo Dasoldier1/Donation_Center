@@ -15,7 +15,7 @@ Credits:
 - Lobillo
 - Dasoldier
 
-Adding the ipn file to your paypal account
+Adding the ipn file to your paypal account<br>
 Login:  https://paypal.com
 Step1: Go to selling tools:
 https://cloud.githubusercontent.com/assets/12301312/15449431/ff3f29e0-1f7d-11e6-80bf-8d87bdba1bdc.jpg
