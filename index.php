@@ -274,5 +274,12 @@ if(isset($_POST['btn-login']))
 	</div> <!-- /container -->
 		<script src="system/assets/bootstrap/js/jquery-1.9.1.min.js"></script>
 		<script src="system/assets/bootstrap/js/bootstrap.min.js"></script>
+		<script src="system/assets/js/scripts.js"></script>
+		<script>
+			$(function() {
+				// Invoke the placeholder plugin
+				$('input, textarea').placeholder();
+			});
+		</script>
 </body>
 </html>

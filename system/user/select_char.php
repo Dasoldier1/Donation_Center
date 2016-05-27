@@ -491,5 +491,11 @@ if(isset($_POST['btn-select-char']))
 			<script src="../assets/bootstrap/js/jquery-1.9.1.min.js"></script>
 			<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 			<script src="../assets/js/scripts.js"></script>
+			<script>
+				$(function() {
+					// Invoke the placeholder plugin
+					$('input, textarea').placeholder();
+				});
+			</script>
 	</body>
 </html>
