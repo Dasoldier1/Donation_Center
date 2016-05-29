@@ -165,8 +165,11 @@ $user_role = 'USER';
 				<center><h4><p><?php echo $lang['enchant_items']; ?></p></h4></center>
 					<hr />
 					<?php 
-				// Checks if enchant is enabled in config.
-				if ($enchant_item_enabled == true)
+			// Checks if enchant is enabled in config.
+			if ($enchant_item_enabled == true)
+				{
+				// Gives a message if sandbox is enabled.
+				if ($use_sandbox == false)
 					{
 					// Checks if the user has a character connected to his account otherwise dont show the page content
 					if (strlen($row['characterName']) != '')
@@ -874,24 +877,25 @@ $user_role = 'USER';
 								";
 						}
 					}
-				// Dont show the page because its disabled in the config
+				// Dont show the page and gives a message if sandbox is enabled.
 				else
 					{
 						echo "
 								<div class='alert alert-error'>
-									<center><strong>" . $lang['warning_disabled'] . "</strong></center>
-								</div>
-							";
-					}
-				// Gives a message if sandbox is enabled.
-				if ($use_sandbox == true)
-					{
-						echo "
-								<div class='alert alert-danger'>
 									<center><strong>" . $lang['sandbox_mode'] . "</strong></center>
 								</div>
 							";
 					}
+				}
+			// Dont show the page because its disabled in the config
+			else
+				{
+					echo "
+							<div class='alert alert-error'>
+								<center><strong>" . $lang['warning_disabled'] . "</strong></center>
+							</div>
+						";
+				}
 					?>
 					<br>
 				<hr />
