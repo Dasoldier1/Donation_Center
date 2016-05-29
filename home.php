@@ -271,7 +271,7 @@ $user_role = 'USER';
 					<br>
 				<hr />
 				<center><?php echo $lang['made_by']; ?> Dasoldier</center>
-				<hr /><center><table><tr><td><a href="?lang=en" title="English"><img src="system/assets/images/flag/en.png" alt="English"></a> <a href="?lang=es" title="Spanish"><img src="system/assets/images/flag/es.png" alt="Spanish"></a> <a href="?lang=nl" title="Netherlands"><img src="system/assets/images/flag/nl.png" alt="Netherlands"></a></td></tr></table></center>
+				<center><table><tr><td><a href="?lang=en" title="English"><img src="system/assets/images/flag/en.png" alt="English"></a> <a href="?lang=es" title="Spanish"><img src="system/assets/images/flag/es.png" alt="Spanish"></a> <a href="?lang=nl" title="Netherlands"><img src="system/assets/images/flag/nl.png" alt="Netherlands"></a></td></tr></table></center>
 			
 			<!--/.fluid-container-->
 			<script src="system/assets/bootstrap/js/jquery-1.9.1.min.js"></script>
