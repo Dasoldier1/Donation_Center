@@ -331,4 +331,10 @@ $connection_timeout = 5;
 
 // Sets the title of all the pages.
 $site_title = 'U3G | PayPal System';
+
+// Turn languages on or off
+// Default: true
+$english_lang	= true;
+$spanish_lang	= true;
+$dutch_lang		= true;
 ?>

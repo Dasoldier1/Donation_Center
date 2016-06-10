@@ -204,8 +204,29 @@ if(isset($_GET['id']) && isset($_GET['code']))
 					<?php
 				}
 				?>
-					<hr /><center><table><tr><td><a href="?lang=en" title="English"><img src="system/assets/images/flag/en.png" alt="English"></a> <a href="?lang=es" title="Spanish"><img src="system/assets/images/flag/es.png" alt="Spanish"></a> <a href="?lang=nl" title="Netherlands"><img src="system/assets/images/flag/nl.png" alt="Netherlands"></a></td></tr></table></center>
-				</form>
+				<hr />
+				<!--/.language bar-->
+				<center>
+					<table>
+						<tr><td>
+							<?php 
+								if (($english_lang == true) or ($spanish_lang == false) && ($dutch_lang == false))
+									{
+										echo '<a href="?lang=en" title="English"><img src="system/assets/images/flag/en.png" alt="English"></a> ';
+									}
+								if ($spanish_lang == true)
+									{
+										echo '<a href="?lang=es" title="Spanish"><img src="system/assets/images/flag/es.png" alt="Spanish"></a> ';
+									}
+								if ($dutch_lang == true)
+									{
+										echo '<a href="?lang=nl" title="Netherlands"><img src="system/assets/images/flag/nl.png" alt="Netherlands"></a> ';
+									}
+							?>
+						</td></tr>
+					</table>
+				</center>
+			</form>
 		</div> <!-- /container -->
 		<script src="system/assets/bootstrap/js/jquery-1.9.1.min.js"></script>
 		<script src="system/assets/bootstrap/js/bootstrap.min.js"></script>
