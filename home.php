@@ -203,7 +203,16 @@ $user_role = 'USER';
 							fclose($fp);  // close file
 						}
 					?>
-					<center><blockquote>
+					<center>
+						<blockquote>
+							<p>
+							<?php
+								echo $lang['dc_home_admin_message_1'], '<br>';
+								echo $lang['dc_home_admin_message_2'];
+							?>
+							</p>
+						</blockquote>
+						<blockquote>
 							<table cellpadding="0" cellspacing="0" border="2" width="240px">
 								<tr><td>
 									<?php
@@ -215,14 +224,7 @@ $user_role = 'USER';
 								</td></tr>
 							</table>
 						</blockquote>
-						<blockquote>
-							<p>
-							<?php
-								echo $lang['dc_home_admin_message_1'], '<br>';
-								echo $lang['dc_home_admin_message_2'];
-							?>
-							</p>
-						</blockquote></center>
+					</center>
 				<?php 
 					}
 					// End admin content.
