@@ -111,7 +111,7 @@ if ($p->validate_ipn())
 					$pay_text = 'Enchant item';
 				}
 
-			$dc_log = $connection->prepare('INSERT INTO log_paypal_donations(transaction_id, donation, amount, amountminfee, character_name) VALUES(:transid, :pay_text, :amount, :amountminfee, :charname )');
+			$dc_log = $connection->prepare('INSERT INTO paypal_donation_log(transaction_id, donation, amount, amountminfee, character_name) VALUES(:transid, :pay_text, :amount, :amountminfee, :charname )');
 			$dc_log->execute(array(
 			':transid' => $transid,
 			':pay_text' => $pay_text,
