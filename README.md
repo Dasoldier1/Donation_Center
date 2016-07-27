@@ -3,7 +3,8 @@ Paypal System PHP Web for mmorpg games.
 
 1. Edit system/connect.php
 2. Go to system/config.php and change this file according to YOUR preferred settings
-3. If you want to enable icons unpack icons.rar located at Donation_Center\system\assets\images\icons
+3. Insert the sql files into your database. They are located in the sql folder.
+4. If you want to enable icons unpack icons.rar located at Donation_Center\system\assets\images\icons
 
 NOTE: If you dont put this folder in your webroot please go to system\assets\securimage and edit config.inc.php
 Look at line 20: require $_SERVER['DOCUMENT_ROOT'] .'/donation_center/system/connect.php';

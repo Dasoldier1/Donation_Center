@@ -337,4 +337,8 @@ $site_title = 'U3G | PayPal System';
 $english_lang	= true;
 $spanish_lang	= true;
 $dutch_lang		= true;
+
+// Sets the timeout if user is inactive for x minutes.
+// Default: 15
+$user_timeout	= 15;
 ?>

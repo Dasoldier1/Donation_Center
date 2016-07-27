@@ -28,11 +28,30 @@ $item_name = $xmlload->item[$item_id_min1]['name'];
 // used for showing item icons
 $icon_path = "../assets/images/icons/5-" . $item_id . ".jpg";
 
-
+// Checks if user is logged in, otherwise redirect to index.php.
 if(!$user_home->is_logged_in())
 	{
 		$user_home->redirect('../../index.php');
 	}
+
+// Calculate timeout for config
+$timeout = 60 * $user_timeout;
+ 
+// Check if the timeout field exists.
+if(isset($_SESSION['timeout']))
+	{
+
+	// Calculate: current time minus timeout time.
+	$currenttime = time() - (int)$_SESSION['timeout'];
+
+	if($currenttime > $timeout)
+		{
+			$user_home->redirect('logout.php');
+		}
+	}
+
+// Update the timeout sets current time.
+$_SESSION['timeout'] = time();
 
 // Redirect to logout if no connection to the database can be made.
 if ($con_check == false)
@@ -50,6 +69,12 @@ $user_role = 'USER';
 <!DOCTYPE html>
 	<head>
 		<title><?php echo $site_title, ' ', $row['userName']; ?></title>
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Lineage 2: PayPal System!">
+		<meta name="keywords" content="l2, lineage, lineage2, u3games, u3g, u3, paypal, system">
+		<meta name="author" content="U3games, Swarlog, Dasoldier">
 		<!-- Bootstrap -->
 		<link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="../assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -433,5 +458,8 @@ $user_role = 'USER';
 			<script src="../assets/bootstrap/js/jquery-1.9.1.min.js"></script>
 			<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 			<script src="../assets/js/scripts.js"></script>
+			<script type="text/javascript">
+				setTimeout(function() { window.location.href = "../../logout.php"; }, 60000 * <?php echo $user_timeout;?> );
+			</script>
 	</body>
 </html>

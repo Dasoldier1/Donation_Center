@@ -31,6 +31,25 @@ if(!$user_home->is_logged_in())
 		$user_home->redirect('../../index.php');
 	}
 
+// Calculate timeout for config
+$timeout = 60 * $user_timeout;
+ 
+// Check if the timeout field exists.
+if(isset($_SESSION['timeout']))
+	{
+
+	// Calculate: current time minus timeout time.
+	$currenttime = time() - (int)$_SESSION['timeout'];
+
+	if($currenttime > $timeout)
+		{
+			$user_home->redirect('logout.php');
+		}
+	}
+
+// Update the timeout sets current time.
+$_SESSION['timeout'] = time();
+
 // Redirect to logout if no connection to the database can be made.
 if ($con_check == false)
 	{
@@ -48,6 +67,12 @@ $user_role = 'USER';
 <html class="no-js">
 	<head>
 		<title><?php echo $site_title, ' ', $row['userName']; ?></title>
+		<!-- Meta -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Lineage 2: PayPal System!">
+		<meta name="keywords" content="l2, lineage, lineage2, u3games, u3g, u3, paypal, system">
+		<meta name="author" content="U3games, Swarlog, Dasoldier">
 		<!-- Bootstrap -->
 		<link href="../assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="../assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
@@ -172,10 +197,10 @@ $user_role = 'USER';
 				<center><h4><p><?php echo $lang['admin_message_how_to']; ?></p></h4></center>
 					<hr />
 						<blockquote>
-							<b>Configure config files</b><br><br>
+							<b>How to configure the system</b><br><br>
 							1. Edit system/connect.php<br>
 							2. Go to system/config.php and change this file according to YOUR preferred settings<br>
-							2. Go to system/admin/admin_config.php and change this file according to YOUR preferred settings<br>
+							3. If you want to enable icons unpack icons.rar located at Donation_Center\system\assets\images\icons
 						</blockquote>
 						<hr />
 						<blockquote>
@@ -282,5 +307,8 @@ $user_role = 'USER';
 			<script src="../assets/bootstrap/js/jquery-1.9.1.min.js"></script>
 			<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 			<script src="../assets/js/scripts.js"></script>
+			<script type="text/javascript">
+				setTimeout(function() { window.location.href = "../../logout.php"; }, 60000 * <?php echo $user_timeout;?> );
+			</script>
 	</body>
 </html>
