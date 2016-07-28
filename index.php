@@ -133,7 +133,7 @@ if(isset($_POST['btn-login']))
 					$local_log .= '<hr />';
 
 					// Write to log
-					$fp=fopen('system/log/website_error_log.php','a');
+					$fp=fopen('system/log/failed_login_log.php','a');
 					fwrite($fp, $local_log . ""); 
 
 					fclose($fp);  // close file

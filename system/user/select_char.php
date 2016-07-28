@@ -307,6 +307,7 @@ if(isset($_POST['btn-select-char']))
 												<li><a href="../admin/database_log.php"><?php echo $lang['menu_admin_db_log']; ?></a></li>
 												<li><a href="../admin/web_ipn_error_log.php"><?php echo $lang['menu_admin_web_ipn_log']; ?></a></li>
 												<li><a href="../admin/paypal_response_log.php"><?php echo $lang['menu_admin_paypal_response']; ?></a></li>
+												<li><a href="../admin/failed_login_log.php"><?php echo $lang['menu_admin_failed_login']; ?></a></li>
 												<li><a href="../admin/how_to.php"><?php echo $lang['menu_admin_how_to']; ?></a></li>
 												<li><a href="../admin/support_links.php"><?php echo $lang['menu_admin_support_links']; ?></a></li>
 											</ul>
@@ -489,7 +490,7 @@ if(isset($_POST['btn-select-char']))
 							$local_log .= '<hr />';
 
 							// Write to log
-							$fp=fopen('../log/website_error_log.php','a');
+							$fp=fopen('../log/failed_login_log.php','a');
 							fwrite($fp, $local_log . ""); 
 
 							fclose($fp);  // close file

@@ -198,11 +198,11 @@ $user_role = 'USER';
 			if ($user_role != $row['userRole'])
 				{
 			?>
-				<center><h4><p><?php echo $lang['admin_message_response_log']; ?></p></h4></center>
+				<center><h4><p><?php echo $lang['menu_admin_failed_login']; ?></p></h4></center>
 					<hr />
 						<blockquote>
 							<?php
-							include '../log/ipn_log.php';
+							include '../log/failed_login_log.php';
 							?>
 						</blockquote>
 				<?php 

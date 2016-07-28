@@ -123,6 +123,7 @@ $user_role = 'USER';
 											<li><a href="system/admin/database_log.php"><?php echo $lang['menu_admin_db_log']; ?></a></li>
 											<li><a href="system/admin/web_ipn_error_log.php"><?php echo $lang['menu_admin_web_ipn_log']; ?></a></li>
 											<li><a href="system/admin/paypal_response_log.php"><?php echo $lang['menu_admin_paypal_response']; ?></a></li>
+											<li><a href="system/admin/failed_login_log.php"><?php echo $lang['menu_admin_failed_login']; ?></a></li>
 											<li><a href="system/admin/how_to.php"><?php echo $lang['menu_admin_how_to']; ?></a></li>
 											<li><a href="system/admin/support_links.php"><?php echo $lang['menu_admin_support_links']; ?></a></li>
 										</ul>
