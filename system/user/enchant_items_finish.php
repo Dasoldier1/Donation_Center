@@ -31,24 +31,27 @@ if(!$user_home->is_logged_in())
 		$user_home->redirect('../../index.php');
 	}
 
-// Calculate timeout for config
-$timeout = 60 * $user_timeout;
- 
-// Check if the timeout field exists.
-if(isset($_SESSION['timeout']))
+// Enable user timeout if enabled in config.
+if ($timeout_enabled == true)
 	{
+		// Calculate timeout for config
+		$timeout = 60 * $user_timeout;
+ 
+		// Check if the timeout field exists.
+		if(isset($_SESSION['timeout']))
+			{
 
-	// Calculate: current time minus timeout time.
-	$currenttime = time() - (int)$_SESSION['timeout'];
+			// Calculate: current time minus timeout time.
+			$currenttime = time() - (int)$_SESSION['timeout'];
 
-	if($currenttime > $timeout)
-		{
-			$user_home->redirect('logout.php');
-		}
+			if($currenttime > $timeout)
+				{
+					$user_home->redirect('logout.php');
+				}
+			}
+		// Update the timeout sets current time.
+		$_SESSION['timeout'] = time();
 	}
-
-// Update the timeout sets current time.
-$_SESSION['timeout'] = time();
 
 // Redirect to logout if no connection to the database can be made.
 if ($con_check == false)
@@ -951,8 +954,14 @@ $user_role = 'USER';
 			<script src="../assets/bootstrap/js/jquery-1.9.1.min.js"></script>
 			<script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 			<script src="../assets/js/scripts.js"></script>
-			<script type="text/javascript">
-				setTimeout(function() { window.location.href = "../../logout.php"; }, 60000 * <?php echo $user_timeout;?> );
-			</script>
+				<?php 
+					// Enable user timeout if enabled in config.
+					if ($timeout_enabled == true)
+						{
+				?>
+							<script type="text/javascript">
+								setTimeout(function() { window.location.href = "../../logout.php"; }, 60000 * <?php echo $user_timeout;?> );
+							</script>
+				<?php } ?>
 	</body>
 </html>

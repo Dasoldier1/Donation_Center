@@ -338,6 +338,10 @@ $english_lang	= true;
 $spanish_lang	= true;
 $dutch_lang		= true;
 
+// Enable or disable user timeout if he is inactive for to long.
+// Default: true
+$timeout_enabled = true;
+
 // Sets the timeout if user is inactive for x minutes.
 // Default: 15
 $user_timeout	= 15;
