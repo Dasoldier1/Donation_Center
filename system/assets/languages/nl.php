@@ -206,7 +206,7 @@ $lang['admin_support_links']			= 'Support links';
 $lang['admin_web_ipn_log']				= 'Website en ipn error log';
 
 // failed_login_log.php
-$lang['menu_admin_failed_login']		= 'Failed login attempts';
+$lang['menu_admin_failed_login']		= 'Gefaalde login pogingen';
 
 // Done.php
 $lang['done_completed']					= 'Donatie compleet';
