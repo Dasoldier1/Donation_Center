@@ -18,19 +18,43 @@ $database_class = new Database();
 // Checks the connection.
 $con_check = $database_class->dbConnection();
 
+// Gets the correct address
+//Test if it is a shared client
+if (!empty($_SERVER['HTTP_CLIENT_IP']))
+	{
+		$get_ip=$_SERVER['HTTP_CLIENT_IP'];
+	}
+// Checks if its a proxy address
+elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))
+	{
+		$get_ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+	}
+// Use normal remote address
+else
+	{
+		$get_ip=$_SERVER['REMOTE_ADDR'];
+	}
+
 // Checks if id and token code is empty if so redirect user to index.php.
 if(empty($_GET['id']) && empty($_GET['code']))
 	{
 		$user->redirect('index.php');
 	}
-// Checks if id and token code is setted.
-if(isset($_GET['id']) && isset($_GET['code']))
+
+// If submit button is used.
+if(isset($_POST['btn-reset-pass']))
 {
-	// Wait for x seconds.
-	if ($loading_delay == true)
-		{
-			sleep($delaytime);
-		}
+		// Wait for x seconds.
+		if ($loading_delay == true)
+			{
+				sleep($delaytime);
+			}
+	// Checks if id and token code is setted.
+	if(isset($_GET['id']) && isset($_GET['code']))
+	{
+			// Checks if captcha is correct.
+			if ($securimage->check($_POST['captcha_code']) == true) 
+			{
 				$id = base64_decode($_GET['id']);
 				$code = $_GET['code'];
 				
@@ -39,15 +63,10 @@ if(isset($_GET['id']) && isset($_GET['code']))
 				$select_uid_token->execute(array(":uid"=>$id,":token"=>$code));
 				$rows = $select_uid_token->fetch(PDO::FETCH_ASSOC);
 
-			// Checks if the user got the correct id and token.
-			if($select_uid_token->rowCount() == 1)
-			{
-				// If submit button is used.
-				if(isset($_POST['btn-reset-pass']))
+				// Checks if the user got the correct id and token.
+				if($select_uid_token->rowCount() == 1)
 				{
-					// Checks if captcha is correct.
-					if ($securimage->check($_POST['captcha_code']) == true) 
-					{
+
 						$pass = $user->sanitize($_POST['pass']);
 						$cpass = $user->sanitize($_POST['confirm-pass']);
 						// If password is empty give a message.
@@ -105,25 +124,43 @@ if(isset($_GET['id']) && isset($_GET['code']))
 									// Redirect to index.php
 									header("refresh:5;index.php");
 								}
-					}
-					// Captcha is wrong
-					else
-						{
-							$captcha_error = "	<div class='alert alert-error'>
-													<button class='close' data-dismiss='alert'>&times;</button>
-													<center><strong>" . $lang['warning_captcha_wrong'] . "</strong></center>
-												</div>";
-						}
+				}
+				// No account is found
+				else
+				{
+					$msg =
+							"<div class='alert alert-danger'>
+								<center><strong>" . $lang['warning_no_account'] . "</strong></center>
+							</div>";
+					
+					// Write to log file.
+					//logging: Timestamp
+					$local_log = '['.date('m/d/Y g:i A').'] - '; 
+
+					//logging: response from the server
+					$local_log .= "RESETPASS.PHP SOMEONE TRIED TO CHANGE A PASSWORD WITH THE WRONG ID AND TOKEN<br>";
+					$local_log .= "IP-ADDRESS: ". $get_ip ."<br>";
+					$local_log .= '<hr />';
+
+					// Write to log
+					$fp=fopen('system/log/failed_login_log.php','a');
+					fwrite($fp, $local_log . ""); 
+
+					fclose($fp);  // close file
+
+					// Redirect to index.php
+					header("refresh:5;index.php");
 				}
 			}
-			// No account is found
+			// Captcha is wrong
 			else
-			{
-				$msg = "<div class='alert alert-success'>
-							<button class='close' data-dismiss='alert'>&times;</button>
-							<center><strong>" . $lang['warning_no_account'] . "</strong></center>
-						</div>";
-			}
+				{
+					$captcha_error = "	<div class='alert alert-error'>
+											<button class='close' data-dismiss='alert'>&times;</button>
+											<center><strong>" . $lang['warning_captcha_wrong'] . "</strong></center>
+										</div>";
+				}
+	}
 }
 ?>
 <!DOCTYPE html>
@@ -147,9 +184,6 @@ if(isset($_GET['id']) && isset($_GET['code']))
   </head>
 	<body id="login">
 		<div class="container">
-			<div class='alert alert-success'>
-				<center><?php echo $rows['userName'], ' ', $lang['dc_message_15']; ?></center>
-			</div>
 				<form class="form-signin" method="post">
 					<center><h3 class="form-signin-heading"><?php echo $lang['dc_message_16']; ?></h3></center><hr />
 					<?php
@@ -185,6 +219,9 @@ if(isset($_GET['id']) && isset($_GET['code']))
 							echo $msg;
 						}
 					?>
+					<div class='alert alert-success'>
+						<center><?php echo $lang['dc_message_15']; ?></center>
+					</div>
 					<input type="password" class="input-block-level" placeholder="New Password" name="pass" required />
 					<input type="password" class="input-block-level" placeholder="Confirm New Password" name="confirm-pass" required />
 					<input type="text" class="input-block-level" placeholder="Captcha code" name="captcha_code" maxlength="6" required/>

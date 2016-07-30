@@ -59,7 +59,7 @@ $lang['dc_message_11']					= 'Please enter your email address. You will receive 
 $lang['dc_message_12']					= 'Generate new Password';
 $lang['dc_message_13']					= 'Back';
 $lang['dc_message_14']					= 'Password Changed.';
-$lang['dc_message_15']					= 'you are here to reset your forgotton password of your account.';
+$lang['dc_message_15']					= 'You are here to reset your forgotton password of your account.';
 $lang['dc_message_16']					= 'Password Reset.';
 $lang['dc_message_17']					= 'Reset Your Password.';
 $lang['dc_message_18']					= 'Success!';
@@ -204,6 +204,9 @@ $lang['admin_support_links']			= 'Support links';
 
 // Web_ipn_error_log.php
 $lang['admin_web_ipn_log']				= 'Website and ipn error log';
+
+// failed_login_log.php
+$lang['menu_admin_failed_login']		= 'Failed login attempts';
 
 // Done.php
 $lang['done_completed']							= 'Donation Complete';

@@ -59,7 +59,7 @@ $lang['dc_message_11']					= 'Please enter your email address. You will receive 
 $lang['dc_message_12']					= 'Generate new Password';
 $lang['dc_message_13']					= 'Back';
 $lang['dc_message_14']					= 'Password Changed.';
-$lang['dc_message_15']					= 'you are here to reset your forgotton password of your account.';
+$lang['dc_message_15']					= 'You are here to reset your forgotton password of your account.';
 $lang['dc_message_16']					= 'Password Reset.';
 $lang['dc_message_17']					= 'Reset Your Password.';
 $lang['dc_message_18']					= 'Success!';
@@ -198,6 +198,9 @@ $lang['admin_message_how_to']			= 'How to';
 
 // Paypal_response_log.php
 $lang['admin_message_response_log']		= 'IPN paypal response log';
+
+// failed_login_log.php
+$lang['menu_admin_failed_login']		= 'Failed login attempts';
 
 // Support_links.php
 $lang['admin_support_links']			= 'Support links';

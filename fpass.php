@@ -50,10 +50,12 @@ if(isset($_POST['btn-submit']))
 		// E-mail address is valid.
 		else
 			{
-				// Select userEmail.
-				$select_user = $user->runQuery("SELECT userID FROM paypal_donation_users WHERE userEmail=:email LIMIT 1");
-				$select_user->execute(array(":email"=>$email));
-				$row = $select_user->fetch(PDO::FETCH_ASSOC);
+			try
+				{
+					// Select userEmail.
+					$select_user = $user->runQuery("SELECT userID FROM paypal_donation_users WHERE userEmail=:email LIMIT 1");
+					$select_user->execute(array(":email"=>$email));
+					$row = $select_user->fetch(PDO::FETCH_ASSOC);
 
 				// Checks if e-mail address exsists.
 				if($select_user->rowCount() == 1)
@@ -87,16 +89,40 @@ if(isset($_POST['btn-submit']))
 									" . $lang['dc_message_9'] . "</strong></center>
 								</div>";
 					}
-				// E-mail adress not found 
-				else
+					// E-mail adress not found 
+					else
+						{
+							$msg = "<div class='alert alert-danger'>
+										<button class='close' data-dismiss='alert'>&times;</button>
+										<center><strong>" . $lang['warning_email_not_found'] . "</strong></center>
+									</div>";
+						}
+				}
+				catch(PDOException $e)
 					{
-						$msg = "<div class='alert alert-danger'>
-									<button class='close' data-dismiss='alert'>&times;</button>
-									<center><strong>" . $lang['warning_email_not_found'] . "</strong></center>
-								</div>";
+						require('system/config.php');
+						
+						// Visible end user reporting.
+						if ($use_reporting == true)
+						{
+							echo 'ERROR: ' . $e->getMessage();
+						}
+						
+						//logging: Timestamp
+						$local_log = '['.date('m/d/Y g:i A').'] - '; 
+
+						//logging: response from the server
+						$local_log .= "FPASS.PHP ERROR: ". $e->getMessage();
+						$local_log .= '<hr />';
+
+						// Write to log
+						$fp=fopen('system/log/website_error_log.php','a');
+						fwrite($fp, $local_log . ""); 
+
+						fclose($fp);  // close file
 					}
 			}
-		}
+	}
 	// Captcha is wrong.
 	else
 	{
