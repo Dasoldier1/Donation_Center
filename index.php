@@ -195,7 +195,7 @@ if(isset($_POST['btn-login']))
 		<form class="form-signin" method="post">
 			<center><h2 class="form-signin-heading"><?php echo $lang['dc_message_1']; ?></h2></center><hr />
 <?php
-			// Check if a connection could be made if not dont show the form.
+		// Check if a connection could be made, if not dont show the form.
 		if ($con_check == true)
 			{
 				// Show warning when admin account creation is enabled.

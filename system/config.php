@@ -292,7 +292,7 @@ $loading_delay = true;
 $delaytime = 3;
 
 // Total failed login attempts allowed after the user gets blocked for a couple of minutes.
-// Default: 3
+// Default: 5
 $allowed_login_attempts = 5;
 
 // Total timeout interval in minutes after to many login attempts.

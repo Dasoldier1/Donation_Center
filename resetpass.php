@@ -108,7 +108,7 @@ if(isset($_POST['btn-reset-pass']))
 							else
 								{
 									// Update the new password in the database.
-									$password = password_hash($cpass, PASSWORD_DEFAULT);
+									$password = password_hash($cpass, PASSWORD_DEFAULT, ['cost' => 12]);
 									$update_password = $user->runQuery("UPDATE paypal_donation_users SET userPass=:upass WHERE userID=:uid");
 									$update_password->execute(array(":upass"=>$password,":uid"=>$rows['userID']));
 									
