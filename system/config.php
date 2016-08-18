@@ -47,10 +47,6 @@ $currency_code = 'EUR';
 //change the currency on the donation centre page. Visible html only
 $currency_code_html = '&euro;';
 
-// Define the donation item_id
-// Default item goldbar
-$item_id = '3470';
-
 // Turn donation options on or off (true=on | false=off)
 // Reward coins
 $coins_enabled = true;
@@ -85,7 +81,11 @@ $mail_subject	= "Donation system";
  * COIN OPTIONS
  * IMPORTANT: Always use a different $donatecoinamount price amount on eatch option!!!.
  */
- 
+
+// Define the donation item_id
+// Default item goldbar
+$item_id = '3470';
+
 // Define coin option 1 (true=on | false=off)
 $coins1_enabled = true;
 // price of the donation.
